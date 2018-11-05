@@ -1,3 +1,5 @@
+#include "functions.h"
+
 void AddHistos(unsigned int first_run, unsigned int last_run, unsigned int last_segment, unsigned int detn){
 
 	TH1F *hamp = new TH1F("hamp", "amplitude spectrum", 16384, 0, 16383);
