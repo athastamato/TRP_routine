@@ -1,3 +1,5 @@
+#include "functions.h"
+
 void HPGe(unsigned int first_run, unsigned int last_run, unsigned int first_segment, unsigned int last_segment){
 
 double sample_rate = 225.; // sampling rate      [MHz] for IFIN detectors 900.
