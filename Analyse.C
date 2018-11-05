@@ -20,9 +20,9 @@ void Analyze(unsigned int first_run, unsigned int last_run, unsigned int first_s
 
 // (2) Get the Signals
 	for (unsigned int run = first_run; run<=last_run; run++){
-		for (unsigned int segm = first_segment; segm<=last_segment; segm++){//for (unsigned int segm = 2; segm<=2; segm++){
+		for (unsigned int segm = first_segment; segm<=last_segment; segm++){
 			for (unsigned int idx=0; idx<=19; ++idx){
-		//for (unsigned int segm = 79; segm<=79; segm++){
+
 				std::vector<float> tof;
 				TH1F *htof    = new TH1F(TString::Format("htof_%d", segm), "tof spectrum", 1e6, 0, 0.01);
 				TH1F *htofLog = new TH1F(TString::Format("htofLog_%d", segm), "tof spectrum", nbins, tbins);
@@ -65,7 +65,7 @@ void Analyze(unsigned int first_run, unsigned int last_run, unsigned int first_s
 				cout << "Threshold is : " << RMSthres << endl;
 				cout << "Locating Pulses" << endl;
 				LocatePulseEdges(points, x, derivative, RMSthres, left, right);
-				//if (left.size()>200){cout << "***Something's wrong with the derivative. Discaritng this movie. Moving on." << endl; continue;}
+
 				cout << "Calculating amplitudes" << endl;
 				FindAmplitudes (points, 100, x, y, left, right, amplitude);
 				FindTime(points, left, right, x, derivative, tof, amplitude, 100, 5.e-7, (-1.)*RMSthres);
@@ -73,11 +73,7 @@ void Analyze(unsigned int first_run, unsigned int last_run, unsigned int first_s
 				for (int i=0; i<amplitude.size(); i++){
 					hamp->Fill(amplitude[i]);
 				}
-//			for (int i=0; i<left.size(); i++){
-//				if (right[i]<=0.01){
-//					cout << "Left side : " << left[i] << ", Right side : " << right[i] << ", Amplitude : " << amplitude[i] << endl;
-//				}
-//			}
+
 				delete[] x;
 				delete[] y;
 				delete[] mean;
@@ -90,52 +86,13 @@ void Analyze(unsigned int first_run, unsigned int last_run, unsigned int first_s
 
 				delete[] derivative;
 
-//			hSignal->SetLineColor(kBlack);
-//			hDerivative->SetLineColor(kRed);
-//			TFile fout(TString::Format("derivative_TEST_Au.root"), "UPDATE");
-//			cout << "Saving File " << fout.GetName() << endl;
-//			hSignal->SetName(TString::Format("hSignal_%d_%d_%d", detn, run, segm));
-//	   		hSignal->Write();
-//			hDerivative->SetName(TString::Format("hDerivative_%d_%d_%d", detn, run, segm));
-//			hDerivative->Write();
-//			hRMS->SetName(TString::Format("hRMS_%d_%d_%d", detn, run, segm));
-//			hRMS->Write();
-//			fout.Close();
-//			hSignal->Delete(); hDerivative->Delete(); hRMS->Delete(); //hamp->Delete();
-
 				TFile fout(TString::Format("amp_%d_%d_%d.root", first_run, last_run, last_segment), "UPDATE");
 				cout << "Saving File " << fout.GetName() << endl;
 				hamp->Write();
 				fout.Close();
-//			hamp->Delete();
-
-//			for (int i=0; i<tof.size(); i++){
-//				htof->Fill(tof[i]-tof[0]);
-//				htofLog->Fill(tof[i]-tof[0]);
-////				if (tof[i] <= 2e-4){
-//					cout << "Time of flight : " << tof[i]-tof[0] << endl;
-////				}
-//			}
-
-//			TFile ftof(TString::Format("tof_%d_%d_%d_%d_TEST.root", detn, first_run, last_run, last_segment), "UPDATE");
-//			cout << "Saving File " << ftof.GetName() << endl;
-//			htof->Write(); htofLog->Write();
-//			ftof.Close();
-//			htof->Delete(); htofLog->Delete();
 
 			}// end of loop over indices
 		}// end of loop over segments
 	}// end of loop over runs
-//	TFile fout(TString::Format("amp_%d_%d_%d.root", first_run, last_run, last_segment), "UPDATE");
-//	cout << "Saving File " << fout.GetName() << endl;
-//	hamp->Write();
-//	fout.Close();
-//	for (int i=0; i<tof.size(); i++){
-//		htof->Fill(tof[i]);
-//	}
-//	TFile ftof(TString::Format("tof_%d_%d_%d.root", first_run, last_run, last_segment), "UPDATE");
-//	cout << "Saving File " << ftof.GetName() << endl;
-//	htof->Write();
-//	ftof.Close();
 
 }//___Analyze()
