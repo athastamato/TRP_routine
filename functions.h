@@ -1,5 +1,4 @@
-void GetDerivative(int points, double* signal_x, double* signal_y, int stepsize, double* derivative)
-{
+void GetDerivative(int points, double* signal_x, double* signal_y, int stepsize, double* derivative){
   double left,right;
   
   if (stepsize<=0) stepsize=1;
