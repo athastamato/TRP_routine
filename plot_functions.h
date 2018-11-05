@@ -20,58 +20,6 @@ void AddHistos(unsigned int first_run, unsigned int last_run, unsigned int last_
 	hamp->Write();
 	fout.Close();
 
-/*	TFile *f2 = TFile::Open("amp_102632_102632_21-32.root");
-	TH1D *h2 = (TH1D*)f2->Get("hamp");
-	for (int i=0; i<hamp->GetNbinsX(); i++){
-		hamp->AddBinContent(i+1, h2->GetBinContent(i+1) );
-	}
-
-	TFile *f3 = TFile::Open("amp_102632_102632_33-48.root");
-	TH1D *h3 = (TH1D*)f3->Get("hamp");
-	for (int i=0; i<hamp->GetNbinsX(); i++){
-		hamp->AddBinContent(i+1, h3->GetBinContent(i+1) );
-	}
-
-	TFile fout("amplitudes.root", "RECREATE");
-	cout << "Saving File " << fout.GetName() << endl;
-	hamp->Write();
-	fout.Close();
-*/
-
-/*
-	const int T_MAX   = 7;
-	const int T_MIN   = 0;
-	const int N_BPDEC = 1000;
-	const int ndec    = T_MAX - T_MIN;
-	int		  nbins   = (Int_t) ndec*N_BPDEC;
-	double	  step    = (double) ndec / nbins;
-	double	  tbins[nbins+1];
-
-	for(int i=0; i <= nbins; i++) {
-		tbins[i] = (float) pow(10., step * (int) i + T_MIN);
-	}
-
-	TH1D *htof    = new TH1D("htof", "tof spectrum", 1e6, 0, 0.01);
-	TH1F *htofLog = new TH1F("htofLog", "tof spectrum", nbins, tbins);
-	TFile *f = new TFile("tof_2_102642_102642_2000_TEST.root");
-	for (int i=1000; i<=2000; i++){
-		TH1D *h    = (TH1D*)f->Get(TString::Format("htof_%d", i));
-		TH1D *hLog = (TH1D*)f->Get(TString::Format("htofLog_%d", i));
-		if(!h) continue; if(!hLog) continue;
-		for (int j=0; j<htof->GetNbinsX(); j++){
-			htof->AddBinContent(j+1, h->GetBinContent(j+1));
-		}
-		for (int j=0; j<htofLog->GetNbinsX(); j++){
-			htofLog->AddBinContent(j+1, hLog->GetBinContent(j+1));
-		}
-	}
-
-	TFile fout("tof_102626_2_1000_TEST.root", "RECREATE");
-	cout << "Saving File " << fout.GetName() << endl;
-	htof->Write(); htofLog->Write();
-	fout.Close();
-*/
-
 }//___AddHistos()
 
 void AddHTof(){
