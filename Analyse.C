@@ -1,5 +1,12 @@
 #include "functions.h"
 
+/********************************************
+*
+*
+*         
+*
+*********************************************/
+
 void Analyze(unsigned int first_run, unsigned int last_run, unsigned int first_segment, unsigned int last_segment, unsigned int detn){
 
 	const int T_MAX   = 7;
